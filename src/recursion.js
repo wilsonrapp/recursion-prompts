@@ -34,22 +34,69 @@ var sum = function(array) {
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
-  
+  // base case: empty array = 0;
+  if (array.length === 0) {
+    return 0;
+  } else {
+    array = flatten(array);
+    return array[0] + arraySum(array.slice(1));
+  }
+
+  // helper function to flatten array
+  function flatten(arr) {
+    // only flattens for one level of arrays, not nested arrays
+    // return arr.reduce((acc, val) => acc.concat(val), []);
+    return arr.reduce((acc, val) => Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val), []);
+  }
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+  if (n === 0) {
+    return true;
+  } else if (n === 1) {
+    return false;
+  } else if (n < 0) {
+    return isEven(n + 2);
+  } else {
+    return isEven(n - 2);
+  }
+
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+    // if (n === 0) {
+  //   return 0;
+  // } else if (n < 0) {
+  //   return n + 1 + sumBelow(n + 1);
+  // } else {
+  //   return n - 1 + sumBelow(n - 1);
+  // }
+  return n === 0 ? 0 : (n < 0 ? n + 1 + sumBelow(n + 1) : n - 1 + sumBelow(n - 1));
 };
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+  // var arr = [];
+  // if (x === y || Math.abs(x - y) === 1) {
+  //   return arr;
+  //   // return arr;
+  // } else {
+  //   // arr.push(x+1)
+  //   // range(x+1, y);
+  //   // return arr;
+  //   // return arr.push(x+1, )
+  // }
+
+  // positive x > y
+  // positive x < y
+  // neg x > y
+  // neg x < y
+
 };
 
 // 7. Compute the exponent of a number.
@@ -58,6 +105,10 @@ var range = function(x, y) {
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  if (exp === 0) {
+    return 1;
+  }
+
 };
 
 // 8. Determine if a number is a power of two.
